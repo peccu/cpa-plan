@@ -18,12 +18,12 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
     url.value = loaded
     return loaded
   }
-  const getLastRow = async () => {
+  const fetchLastRow = async () => {
     const response = await fetch(url.value)
     const json = await response.json()
     return json
   }
-  const postProgress = async (data: Progress) => {
+  const postNewLine = async (data: Progress) => {
     const response = await fetch(url.value, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       // mode: "cors", // no-cors, *cors, same-origin
@@ -41,5 +41,5 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
     return json
   }
 
-  return { url, setUrl, loadUrl, getLastRow, postProgress }
+  return { url, setUrl, loadUrl, fetchLastRow, postNewLine }
 })

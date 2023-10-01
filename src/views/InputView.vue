@@ -6,9 +6,9 @@ const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
 
 let lastrow: Ref<Progress> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-const get = async () => {
-    const json = await deploymenturl.getLastRow()
-    console.log('get response: ', json)
+const fetch = async () => {
+    const json = await deploymenturl.fetchLastRow()
+    console.log('fetch response: ', json)
     lastrow.value = json
     // TODO set it to local refs
     return json
@@ -33,13 +33,13 @@ const post = async () => {
         businessPractice.value
     ]
     console.log('sending', data)
-    const json = await deploymenturl.postProgress(data)
+    const json = await deploymenturl.postNewLine(data)
     console.log('post response: ', json)
     return json
 }
 
 if (deploymenturl.url != '') {
-    get()
+    fetch()
 }
 
 const t = new Date()
@@ -73,7 +73,7 @@ const businessPractice: Ref<number> = ref(0)
     <main>
         <h1>This is an Input page</h1>
         {{ lastrow }}
-        <div><button @click="get">GET</button></div>
+        <div><button @click="fetch">GET</button></div>
         <div class="mt-3">
             <div class="mt-3">
                 <span class="mr-3 text-xl">対象日</span>
