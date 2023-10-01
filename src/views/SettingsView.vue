@@ -32,7 +32,7 @@ const post = async () => {
         <h1>This is an Settings page</h1>
         <div>URL: {{ url }}</div>
         <div>loaded URL: {{ deploymenturl.url }}</div>
-        <input name="deploymentURL" type="url" v - model="url" />
+        <input name="deploymentURL" type="url" v-model="url" />
         <div><button @click="saveUrl">Save</button></div>
         <div><button @click="get">GET</button></div>
         <div><button @click="post">POST</button></div>
