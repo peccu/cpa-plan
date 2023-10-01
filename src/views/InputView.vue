@@ -7,6 +7,20 @@ deploymenturl.loadUrl()
 
 let inLoading: Ref<boolean> = ref(true)
 let lastrow: Ref<Progress> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+const fetchSchedule = async () => {
+    inLoading.value = true
+    const json = await deploymenturl.fetchSchedule()
+    console.log('fetch response: ', json)
+    const cols = json.shift()
+   console.log('cols, rest', [cols, json])
+   json.map((line: any) => {
+     cols.map((col: string, i: any) => {
+       console.log(`${col}: ${line[i]}`)
+     })
+   })
+    inLoading.value = false
+    return json
+}
 const fetch = async () => {
     inLoading.value = true
     const json = await deploymenturl.fetchLastRow()
@@ -29,6 +43,7 @@ const fetch = async () => {
     businessLecture.value = json[15]
     businessPractice.value = json[16]
     inLoading.value = false
+    await fetchSchedule()
     return json
 }
 const post = async () => {

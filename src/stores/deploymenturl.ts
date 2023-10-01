@@ -23,6 +23,11 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
     const json = await response.json()
     return json
   }
+  const fetchSchedule = async () => {
+    const response = await fetch(`${url.value}?q=schedule`)
+    const json = await response.json()
+    return json
+  }
   const postNewLine = async (data: Progress) => {
     const response = await fetch(url.value, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -41,5 +46,5 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
     return json
   }
 
-  return { url, setUrl, loadUrl, fetchLastRow, postNewLine }
+  return { url, setUrl, loadUrl, fetchLastRow, postNewLine, fetchSchedule }
 })
