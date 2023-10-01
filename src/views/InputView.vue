@@ -105,29 +105,29 @@ const businessPractice: Ref<number> = ref(0)
                 <h2 class="text-2xl">財務会計論</h2>
             </div>
             <div class="mt-3">
-              <span class="inline-block mr-3 w-20 text-xl">講義</span>
-              <span class="inline-block mr-3 w-20 text-xl">答練</span>
-              <span class="inline-block mr-3 w-20 text-xl">応用</span>
+                <span class="inline-block mr-3 w-20 text-xl">講義</span>
+                <span class="inline-block mr-3 w-20 text-xl">答練</span>
+                <span class="inline-block mr-3 w-20 text-xl">応用</span>
             </div>
             <div class="mt-3">
-              <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
-                                           v-model="financialAccountingLecture" />
-              <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
-                                           v-model="financialAccountingPractice" />
-              <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
-                                           v-model="financialAccountingAdvanced" />
+                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                    v-model="financialAccountingLecture" />
+                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                    v-model="financialAccountingPractice" />
+                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                    v-model="financialAccountingAdvanced" />
             </div>
         </div>
         <div class="mt-3">
-                <div class="w-full border-b border-gray-200 text-slate-100">
+            <div class="w-full border-b border-gray-200 text-slate-100">
                 <h2 class="text-2xl">管理会計論</h2>
-                </div>
-                <div class="mt-3">
-                  <span class="inline-block mr-3 w-20 text-xl">講義</span>
-                  <span class="inline-block mr-3 w-20 text-xl">答練</span>
-                  <span class="inline-block mr-3 w-20 text-xl">応用</span>
-                </div>
-                <div class="mt-3">
+            </div>
+            <div class="mt-3">
+                <span class="inline-block mr-3 w-20 text-xl">講義</span>
+                <span class="inline-block mr-3 w-20 text-xl">答練</span>
+                <span class="inline-block mr-3 w-20 text-xl">応用</span>
+            </div>
+            <div class="mt-3">
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
                     v-model="managementAccountingLecture" />
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
@@ -137,48 +137,48 @@ const businessPractice: Ref<number> = ref(0)
             </div>
         </div>
         <div class="mt-3">
-                <div class="w-full border-b border-gray-200 text-slate-100">
+            <div class="w-full border-b border-gray-200 text-slate-100">
                 <h2 class="text-2xl">監査論</h2>
-                </div>
-                <div class="mt-3">
-                    <span class="inline-block mr-3 w-20 text-xl">講義</span>
-                    <span class="inline-block mr-3 w-20 text-xl">答練</span>
-                </div>
-                <div class="mt-3">
+            </div>
+            <div class="mt-3">
+                <span class="inline-block mr-3 w-20 text-xl">講義</span>
+                <span class="inline-block mr-3 w-20 text-xl">答練</span>
+            </div>
+            <div class="mt-3">
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="auditLecture" />
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="auditPractice" />
             </div>
         </div>
         <div class="mt-3">
-                <div class="w-full border-b border-gray-200 text-slate-100">
+            <div class="w-full border-b border-gray-200 text-slate-100">
                 <h2 class="text-2xl">企業法</h2>
-                </div>
-                <div class="mt-3">
-                    <span class="inline-block mr-3 w-20 text-xl">講義</span>
-                    <span class="inline-block mr-3 w-20 text-xl">答練</span>
-                </div>
-                <div class="mt-3">
+            </div>
+            <div class="mt-3">
+                <span class="inline-block mr-3 w-20 text-xl">講義</span>
+                <span class="inline-block mr-3 w-20 text-xl">答練</span>
+            </div>
+            <div class="mt-3">
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="companyLecture" />
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="companyPractice" />
             </div>
         </div>
         <div class="mt-3">
-                <div class="w-full border-b border-gray-200 text-slate-100">
+            <div class="w-full border-b border-gray-200 text-slate-100">
                 <h2 class="text-2xl">租税法</h2>
-                </div>
-                <div class="mt-3">
-                    <span class="inline-block mr-3 w-20 text-xl">講義</span>
-                    <span class="inline-block mr-3 w-20 text-xl">答練</span>
-                    <span class="inline-block mr-3 w-20 text-xl align-middle">理論対策講義</span>
-                </div>
-                <div class="mt-3">
+            </div>
+            <div class="mt-3">
+                <span class="inline-block mr-3 w-20 text-xl">講義</span>
+                <span class="inline-block mr-3 w-20 text-xl">答練</span>
+                <span class="inline-block mr-3 w-20 text-xl align-middle">理論対策講義</span>
+            </div>
+            <div class="mt-3">
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxLecture" />
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxPractice" />
                 <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxLogic" />
             </div>
         </div>
         <div class="mt-3">
-                <div class="w-full border-b border-gray-200 text-slate-100">
+            <div class="w-full border-b border-gray-200 text-slate-100">
                 <h2 class="text-2xl">経営学</h2>
             </div>
             <div class="mt-3">
