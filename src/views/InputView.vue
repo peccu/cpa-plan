@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-// import TheWelcome from '../components/TheWelcome.vue'
 import { useDeploymenturlStore, type Progress } from '@/stores/deploymenturl'
 
 const deploymenturl = useDeploymenturlStore()
