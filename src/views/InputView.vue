@@ -38,7 +38,9 @@ const post = async () => {
     return json
 }
 
-get()
+if (deploymenturl.url != '') {
+    get()
+}
 
 const t = new Date()
 const targetDate: Ref<string> = ref(`${t.getFullYear()}/${t.getMonth() + 1}/${t.getDate()}`)
