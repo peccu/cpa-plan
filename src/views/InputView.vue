@@ -9,8 +9,8 @@ let lastrow: Ref<Progress> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 const get = async () => {
     const json = await deploymenturl.getLastRow()
     console.log('get response: ', json)
-   lastrow.value = json
-   // TODO set it to local refs
+    lastrow.value = json
+    // TODO set it to local refs
     return json
 }
 const post = async () => {
@@ -40,8 +40,8 @@ const post = async () => {
 
 get()
 
- const t = new Date()
-const targetDate: Ref<string> = ref(`${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()}`)
+const t = new Date()
+const targetDate: Ref<string> = ref(`${t.getFullYear()}/${t.getMonth() + 1}/${t.getDate()}`)
 
 // 財務会計論
 const financialAccountingLecture: Ref<number> = ref(0)
