@@ -5,10 +5,10 @@ import { useDeploymenturlStore, type Progress } from '@/stores/deploymenturl'
 const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
 
-let inLoading = true
+let inLoading: Ref<boolean> = ref(true)
 let lastrow: Ref<Progress> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const fetch = async () => {
-    inLoading = true
+    inLoading.value = true
     const json = await deploymenturl.fetchLastRow()
     console.log('fetch response: ', json)
     lastrow.value = json
@@ -28,7 +28,7 @@ const fetch = async () => {
     taxLogic.value = json[14]
     businessLecture.value = json[15]
     businessPractice.value = json[16]
-    inLoading = false
+    inLoading.value = false
     return json
 }
 const post = async () => {
@@ -89,8 +89,9 @@ const businessPractice: Ref<number> = ref(0)
 
 <template>
     <main>
-        <div>{{ inLoading }}
-            <button @click="fetch" :disabled="inLoading" class="py-1 px-3 m-2 rounded ring-2 ring-white">GET</button>
+        <div>
+            <button @click="fetch" :disabled="inLoading" class="py-1 px-3 m-2 rounded ring-2 ring-white">Fetch
+                current</button>
             <span v-if="inLoading">Loading...</span>
         </div>
         <div class="mt-3">
