@@ -13,14 +13,12 @@ const saveUrl = () => {
 
 <template>
     <div class="settings">
-        <h1>This is an Settings page</h1>
-        <div>URL: {{ url }}</div>
-        <div>loaded URL: {{ deploymenturl.url }}</div>
-        <input name="deploymentURL" type="url" v-model="url" />
-        <div><button @click="saveUrl">Save</button></div>
-        <h1 class="pt-0 mx-16 text-3xl font-bold underline">
-            Hello world!
-        </h1>
+        <div class="overflow-scroll">loaded URL: {{ deploymenturl.url }}</div>
+        <input name="deploymentURL" type="url" v-model="url" class="text-black" />
+        <div>inputted URL: {{ url }}</div>
+            <div class="mt-14 w-full">
+              <button @click="saveUrl" class="inline-block py-1 px-3 m-2 w-full rounded ring-2 ring-white">Save</button>
+            </div>
     </div>
 </template>
 
