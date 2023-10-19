@@ -125,11 +125,11 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl">応用</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="financialAccountingLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="financialAccountingPractice" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="financialAccountingAdvanced" />
             </div>
         </div>
@@ -143,11 +143,11 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl">応用</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="managementAccountingLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="managementAccountingPractice" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black"
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black"
                     v-model="managementAccountingAdvance" />
             </div>
         </div>
@@ -160,8 +160,8 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl">答練</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="auditLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="auditPractice" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="auditLecture" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="auditPractice" />
             </div>
         </div>
         <div class="mt-3">
@@ -173,8 +173,8 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl">答練</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="companyLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="companyPractice" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="companyLecture" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="companyPractice" />
             </div>
         </div>
         <div class="mt-3">
@@ -187,9 +187,9 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl align-middle">理論対策講義</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxPractice" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="taxLogic" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="taxLecture" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="taxPractice" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="taxLogic" />
             </div>
         </div>
         <div class="mt-3">
@@ -201,8 +201,8 @@ const businessPractice: Ref<number> = ref(0)
                 <span class="inline-block mr-3 w-20 text-xl">答練</span>
             </div>
             <div class="mt-3">
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="businessLecture" />
-                <input :disabled="inLoading" type="number" class="p-1 mr-3 w-20 text-black" v-model="businessPractice" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="businessLecture" />
+                <input :disabled="inLoading" inputmode="numeric" pattern="[0-9]*" type="text" class="p-1 mr-3 w-20 text-black" v-model="businessPractice" />
             </div>
         </div>
 
