@@ -15,12 +15,16 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+      # - name: Install bun manually
+      #   run: env|sort;curl -fsSL https://bun.sh/install | bash && mv ~/.bun/bin/bun /usr/local/bin && cd /usr/local/bin && ln -s bun bunx
       # https://bun.sh/guides/runtime/cicd
       - name: Install bun
         uses: oven-sh/setup-bun@v1
       # run any `bun` or `bunx` command
+      - name: bun version
+        run: bun --version
       - name: Install dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
       - name: unit test
         run: bun run test:unit
       # - name: e2e test
@@ -43,17 +47,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+    - uses: oven-sh/setup-bun@v1
     - name: Install dependencies
-      run: npm ci
+      run: bun install --frozen-lockfile
     - name: Build
-      run: npm run build
+      run: bun run build
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: bunx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test --update-snapshots
+      run: bunx playwright test --update-snapshots
     - uses: actions/upload-artifact@v3
       if: always()
       with:
@@ -67,17 +69,17 @@ jobs:
     name: 'Playwright Tests : report to github'
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.38.0-jammy
+      image: mcr.microsoft.com/playwright:v1.39.0-jammy
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      - name: install unzip
+        run: apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+      - uses: oven-sh/setup-bun@v1
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
       - name: Build
-        run: npm run build
+        run: bun run build
       - name: Install Playwright Browsers
-        run: npx playwright install msedge && npx playwright install chrome
+        run: bunx playwright install msedge && bunx playwright install chrome
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 npx playwright test --update-snapshots
+        run: HOME=/root GITHUB_REPORT=1 bunx playwright test --update-snapshots
