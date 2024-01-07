@@ -1,4 +1,7 @@
 #!/bin/bash
+
+git submodule update --init
+
 cp -R $(
     export APP=vue-app
     ls -a1 $APP \
