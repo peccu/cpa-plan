@@ -25,6 +25,8 @@ jobs:
         run: bun --version
       - name: Install dependencies
         run: bun install --frozen-lockfile
+      - name: lint
+        run: bun run lint && bun run eslint
       - name: unit test
         run: bun run test:unit
       # - name: e2e test
@@ -41,35 +43,30 @@ jobs:
   # Playwright Tests
   # output report
   # need to preview with npx playwright show-report name-of-my-extracted-playwright-report
-  html_report:
-    name: 'Playwright Tests : report to html'
+  on_ubuntu:
+    name: 'Playwright Tests : runs on ubuntu'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: oven-sh/setup-bun@v1
-    - name: Install dependencies
-      run: bun install --frozen-lockfile
-    - name: Build
-      run: bun run build
-    - name: Install Playwright Browsers
-      run: bunx playwright install --with-deps
-    - name: Run Playwright tests
-      run: bunx playwright test --update-snapshots
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: bunx playwright install --with-deps
+      - name: Build
+        run: bun run build
+      - name: Run Playwright tests. If some error found, you maybe forgot to update snapshots
+        # this environment does not match fonts...
+        run: bunx playwright test --update-snapshots
 
-  # output to github
+  # output to HTML
   # use container
-  github_report:
-    name: 'Playwright Tests : report to github'
+  html_report:
+    name: 'Playwright Tests : running on playwright container and report to html'
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.39.0-jammy
+      image: mcr.microsoft.com/playwright:v1.40.1-jammy
     steps:
       - uses: actions/checkout@v3
       - name: install unzip
@@ -77,9 +74,59 @@ jobs:
       - uses: oven-sh/setup-bun@v1
       - name: Install dependencies
         run: bun install --frozen-lockfile
-      - name: Build
-        run: bun run build
       - name: Install Playwright Browsers
         run: bunx playwright install msedge && bunx playwright install chrome
+      - name: Build
+        run: bun run build
       - name: Run your tests
-        run: HOME=/root GITHUB_REPORT=1 bunx playwright test --update-snapshots
+        run: HOME=/root bunx playwright test
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+      # this action does not work current configuration (github-pages branch or TOKEN)
+      # - name: Deploy result into github pages subdir
+      #   # https://github.com/marketplace/actions/github-pages-action
+      #   if: always() # We want this to always run, even if test fail prior to this step running
+      #   uses: peaceiris/actions-gh-pages@v3.7.3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     destination_dir: .playwright-report
+      #     publish_dir: ./playwright-report/
+      #     keep_files: true
+      - name: Add notes into GitHub Step Summary
+        if: always()
+        run: |
+          echo '# How to preview result' >> $GITHUB_STEP_SUMMARY
+          echo 'Download playwright-report.zip from Artifacts above.' >> $GITHUB_STEP_SUMMARY
+          echo >> $GITHUB_STEP_SUMMARY
+          echo '```sh' >> $GITHUB_STEP_SUMMARY
+          echo 'mkdir tmp' >> $GITHUB_STEP_SUMMARY
+          echo 'cd tmp' >> $GITHUB_STEP_SUMMARY
+          echo 'mv ~/Downloads/playwright-report.zip ./' >> $GITHUB_STEP_SUMMARY
+          echo 'unzip playwright-report.zip' >> $GITHUB_STEP_SUMMARY
+          echo 'bunx vite preview --host 0.0.0.0 --outDir .' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # output to github
+  # use container
+  github_report:
+    name: 'Playwright Tests : running on playwright container and report to github'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.40.1-jammy
+    steps:
+      - uses: actions/checkout@v3
+      - name: install unzip
+        run: apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
+      - uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: bunx playwright install msedge && bunx playwright install chrome
+      - name: Build
+        run: bun run build
+      - name: Run your tests
+        run: HOME=/root GITHUB_REPORT=1 bunx playwright test
