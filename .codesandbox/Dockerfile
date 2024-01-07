@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.39.0-jammy
+FROM mcr.microsoft.com/playwright:v1.40.1-jammy
 
 # Install bun and add it to PATH
 RUN apt update -y && apt install -y curl unzip \
@@ -7,4 +7,4 @@ RUN apt update -y && apt install -y curl unzip \
   && cd /usr/local/bin \
   && ln -s bun bunx
 
-RUN apt-get install -y graphviz
+RUN apt-get install -y graphviz patch
