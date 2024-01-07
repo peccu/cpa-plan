@@ -5,5 +5,6 @@ cp -R $(
 	| grep -Ev '^\.\.?$' \
 	| grep -Ev '^\.git$' \
 	| grep -Ev '^'$APP'$' \
+	| grep -Ev '^update-from-template.sh$' \
 	| xargs -I{} echo "$APP/"{}
    ) ./
