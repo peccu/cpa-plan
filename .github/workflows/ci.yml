@@ -58,7 +58,7 @@ jobs:
         run: bun run build
       - name: Run Playwright tests. If some error found, you maybe forgot to update snapshots
         # this environment does not match fonts...
-        run: bunx playwright test --update-snapshots
+      run: bunx playwright test --update-snapshots
 
   # output to HTML
   # use container
@@ -79,7 +79,7 @@ jobs:
       - name: Build
         run: bun run build
       - name: Run your tests
-        run: HOME=/root bunx playwright test
+        run: HOME=/root bunx playwright test --update-snapshotse2e test tempol
       - uses: actions/upload-artifact@v3
         if: always()
         with:
