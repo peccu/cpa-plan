@@ -1,8 +1,13 @@
 <template>
   <article>
-    <my-header :user="user" @login="onLogin" @logout="onLogout" @create-account="onCreateAccount" />
+    <my-sample-header
+      :user="user"
+      @login="onLogin"
+      @logout="onLogout"
+      @create-account="onCreateAccount"
+    />
 
-    <section class="storybook-page">
+    <section class="storybook-sample-page">
       <h2>Pages in Storybook</h2>
       <p>
         We recommend building UIs with a
@@ -55,7 +60,7 @@
 
 <script lang="ts" setup>
 import './page.css'
-import MyHeader from './Header.vue'
+import MySampleHeader from './SampleHeader.vue'
 
 import { ref } from 'vue'
 
