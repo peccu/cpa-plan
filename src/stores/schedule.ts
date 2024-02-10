@@ -9,8 +9,9 @@ export type ScheduleInput = [
   string
 ]
 type LectureCount = number
+type CourseType = '速習' | 'スタンダード'
 export type Schedule = {
-  course: '速習' | 'スタンダード',
+  course: CourseType,
   lesson: string,
   type: string,
   totalLectures: LectureCount,
@@ -33,8 +34,8 @@ const calcCurrentPlanedPosition = (line: Schedule): LectureCount => {
 }
 
 export const prepareWbs = (schedule: Schedule[]): { speedPlan: Schedule[], standardPlan: Schedule[] } => {
-  const speedPlan = []
-  const standardPlan = []
+  const speedPlan: Schedule[] = []
+  const standardPlan: Schedule[] = []
   schedule.map((line: Schedule) => {
     line.planedProgress = calcCurrentPlanedPosition(line)
     console.log(line)

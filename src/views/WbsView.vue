@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
 import { useDeploymenturlStore } from '@/stores/deploymenturl'
-import { type ScheduleInput, type Schedule, prepareWbs } from '@/stores/schedule'
+import { type CourseType, type ScheduleInput, type Schedule, prepareWbs } from '@/stores/schedule'
 
 const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
@@ -17,7 +17,7 @@ const fetchSchedule = async () => {
    json.shift()
    const schedule = json.map((line: ScheduleInput) => {
         const sche: Schedule = {
-            course: line[0],
+            course: line[0] as CourseType,
             lesson: line[1],
             type: line[2],
             totalLectures: line[3],
