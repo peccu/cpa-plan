@@ -1,6 +1,6 @@
 <script setup="setup" lang="ts">
 import { ref } from 'vue'
-import { useDeploymenturlStore, type Progress } from '@/stores/deploymenturl'
+import { useDeploymenturlStore } from '@/stores/deploymenturl'
 
 const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
