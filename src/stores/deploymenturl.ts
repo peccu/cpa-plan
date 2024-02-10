@@ -1,5 +1,6 @@
 import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
+import { type ScheduleInput } from '@/stores/schedule'
 
 export type Progress = [string, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number]
 
@@ -25,7 +26,7 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
   }
   const fetchSchedule = async () => {
     const response = await fetch(`${url.value}?q=schedule`)
-    const json = await response.json()
+    const json: ScheduleInput[] = await response.json()
     return json
   }
   const postNewLine = async (data: Progress) => {
