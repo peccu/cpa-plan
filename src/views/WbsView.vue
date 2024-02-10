@@ -7,8 +7,8 @@ const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
 
 let inLoading: Ref<boolean> = ref(true)
-let speedPlan: Ref<Schedule> = ref()
-let standardPlan: Ref<Schedule> = ref()
+let speedPlan: Ref<Schedule[]> = ref([])
+let standardPlan: Ref<Schedule[]> = ref([])
 
 const fetchSchedule = async () => {
   inLoading.value = true

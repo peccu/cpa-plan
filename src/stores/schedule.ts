@@ -1,6 +1,6 @@
 export type ScheduleInput = [string, string, string, number, number, number, string, string]
 type LectureCount = number
-type CourseType = '速習' | 'スタンダード'
+export type CourseType = '速習' | 'スタンダード'
 export type Schedule = {
   course: CourseType
   lesson: string
