@@ -2,6 +2,7 @@
 import { ref, type Ref } from 'vue'
 import { useDeploymenturlStore } from '@/stores/deploymenturl'
 import { type CourseType, type ScheduleInput, type Schedule, prepareWbs } from '@/stores/schedule'
+import ProgressBar from '@/components/ProgressBar.vue'
 
 const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
@@ -51,6 +52,10 @@ if (deploymenturl.url != '') {
     </button>
     <span v-if="inLoading">Loading...</span>
     <h2 class="text-2xl">Standard Plan</h2>
+    <template v-for="plan in standardPlan">
+      <h3>{{ plan.lesson }}</h3>
+      <progress-bar :plannedProgress="plan.planedProgress" :actualProgress="20"></progress-bar>
+    </template>
     <pre>{{ JSON.stringify(standardPlan, null, 2) }}</pre>
     <h2 class="text-2xl">Speed Plan</h2>
     <pre>{{ JSON.stringify(speedPlan, null, 2) }}</pre>

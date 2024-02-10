@@ -90,7 +90,11 @@ const businessPractice: Ref<number> = ref(0)
 <template>
   <main>
     <div>
-      <button @click="fetch" :disabled="inLoading" class="py-1 px-3 m-2 rounded ring-2 ring-white">
+      <button
+        @click="fetch"
+        :disabled="inLoading"
+        class="py-1 px-3 m-2 rounded ring-2 ring-white"
+      >
         Fetch current
       </button>
       <span v-if="inLoading">Loading...</span>
