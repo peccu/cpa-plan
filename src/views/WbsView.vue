@@ -54,6 +54,7 @@ if (deploymenturl.url != '') {
     <h2 class="text-2xl">Standard Plan</h2>
     <template v-for="plan in standardPlan">
       <h3>{{ plan.lesson }}</h3>
+      {{ plan.planedProgress }}
       <progress-bar :plannedProgress="plan.planedProgress" :actualProgress="20"></progress-bar>
     </template>
     <pre>{{ JSON.stringify(standardPlan, null, 2) }}</pre>
