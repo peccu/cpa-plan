@@ -14,8 +14,7 @@ const fetchSchedule = async () => {
     inLoading.value = true
     const json = await deploymenturl.fetchSchedule()
     console.log('fetch response: ', json)
-    const cols = json.shift()
-   console.log('cols, rest', [cols, json])
+   json.shift()
    const schedule = json.map((line: ScheduleInput) => {
         const sche: Schedule = {
             course: line[0],
@@ -27,9 +26,6 @@ const fetchSchedule = async () => {
             startDate: new Date(line[6]),
             endDate: new Date(line[7])
         }
-        cols.map((col: string, i: any) => {
-            console.log(`${col}: ${line[i]}`)
-        })
      return sche
     })
     inLoading.value = false

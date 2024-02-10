@@ -26,8 +26,8 @@ type Day = number
 const oneday: Millisec = 1000 * 60 * 60 * 24
 const calcCurrentPlanedPosition = (line: Schedule): LectureCount => {
   // TODO calculate current pland position
-  const days: Day = (line.endDate - line.startDate) / oneday
-  const proceed: Day = Math.round(((new Date()) - line.startDate) / oneday)
+  const days: Day = (line.endDate.getTime() - line.startDate.getTime()) / oneday
+  const proceed: Day = Math.round(((new Date()).getTime() - line.startDate.getTime()) / oneday)
   const daysToToday: Day = Math.max(proceed, 0)
   return Math.round(line.totalLectures * daysToToday / days)
 }
