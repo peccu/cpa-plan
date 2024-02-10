@@ -11,8 +11,12 @@
   "tasks": {
     "bun run build": {
       "name": "bun run build",
-      "command": "bun run build",
+      "command": "bun run build && echo Done",
       "runAtStart": true
+    },
+    "serve built": {
+      "name": "serve built dist",
+      "command": "cd dist; python3 -m http.server"
     },
     "bun run dev": {
       "name": "bun run dev",
