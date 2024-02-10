@@ -9,6 +9,11 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
+    "bun run build": {
+      "name": "bun run build",
+      "command": "bun run build",
+      "runAtStart": true
+    },
     "bun run dev": {
       "name": "bun run dev",
       "command": "bun run format ; bun run dev",
