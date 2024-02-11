@@ -58,7 +58,7 @@ jobs:
         run: bun run build
       - name: Run Playwright tests. If some error found, you maybe forgot to update snapshots
         # this environment does not match fonts...
-      run: bunx playwright test --update-snapshots
+        run: bunx playwright test --update-snapshots
 
   # output to HTML
   # use container
