@@ -1,6 +1,11 @@
 {
   // These tasks will run in order when initializing your CodeSandbox project.
-  "setupTasks": ["bun install"],
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "bun install"
+    }
+  ],
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
@@ -8,8 +13,12 @@
       "name": "Install Dependencies",
       "command": "bun install",
       "restartOn": {
-        "files": ["bun.lockb", "**/package.json"], // File globs that trigger this task to restart
-        "branch": true // restart this task when creating a new branch/fork
+        "files": [
+          "bun.lockb",
+          "**/package.json"
+        ],
+        "branch": true,
+        "resume": false
       }
     },
     "bun run build": {
@@ -38,7 +47,8 @@
     },
     "bun run format": {
       "name": "format",
-      "command": "bun run format"
+      "command": "bun run format",
+      "runAtStart": true
     },
     "bun run test:unit": {
       "name": "unit test",
