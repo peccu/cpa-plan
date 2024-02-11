@@ -24,6 +24,7 @@ const fetchSchedule = async () => {
       totalLectures: line[3],
       associateLectures: line[4],
       regularLectures: line[5],
+      planedProgress: 0,
       startDate: new Date(line[6]),
       endDate: new Date(line[7])
     }
@@ -40,7 +41,7 @@ if (deploymenturl.url != '') {
 }
 
 const dateFormat = (d: Date): string => {
-  return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDay()}`
+  return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDay()}`
 }
 </script>
 
@@ -56,14 +57,20 @@ const dateFormat = (d: Date): string => {
     </button>
     <span v-if="inLoading">Loading...</span>
     <h2 class="text-2xl">Standard Plan</h2>
-    <template v-for="plan in standardPlan">
+    <template v-for="(plan, i) in standardPlan" :key="i">
       <h3>{{ plan.lesson }} : {{ plan.type }}</h3>
       <div class="flex w-full justify-between">
-        <span>開始予定{{ dateFormat(plan.startDate) }}</span>
-        <span>終了予定{{ dateFormat(plan.endDate) }}</span>
+        <span>{{ dateFormat(plan.startDate) }}</span>
+        <span>{{ dateFormat(plan.endDate) }}</span>
       </div>
-      想定進捗{{ plan.planedProgress }} / 合計コマ数{{ plan.totalLectures }}
-      <progress-bar :planned-progress="plan.planedProgress" :actual-progress="20"></progress-bar>
+      <div class="flex w-full justify-between">
+        <span></span>
+        <span> 想定コマ数 {{ plan.planedProgress }} / 合計コマ数 {{ plan.totalLectures }} </span>
+      </div>
+      <progress-bar
+        :planned-progress="Math.round((100 * plan.planedProgress) / plan.totalLectures)"
+        :actual-progress="Math.round((100 * 20) / plan.totalLectures)"
+      ></progress-bar>
     </template>
     <pre>{{ JSON.stringify(standardPlan, null, 2) }}</pre>
     <h2 class="text-2xl">Speed Plan</h2>
