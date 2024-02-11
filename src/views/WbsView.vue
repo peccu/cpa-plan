@@ -38,6 +38,10 @@ const fetchSchedule = async () => {
 if (deploymenturl.url != '') {
   fetchSchedule()
 }
+
+const dateFormat = (d: Date): string => {
+  return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDay()}`
+}
 </script>
 
 <template>
@@ -53,8 +57,12 @@ if (deploymenturl.url != '') {
     <span v-if="inLoading">Loading...</span>
     <h2 class="text-2xl">Standard Plan</h2>
     <template v-for="plan in standardPlan">
-      <h3>{{ plan.lesson }}</h3>
-      {{ plan.planedProgress }}
+      <h3>{{ plan.lesson }} : {{ plan.type }}</h3>
+      <div class="flex w-full justify-between">
+        <span>開始予定{{ dateFormat(plan.startDate) }}</span>
+        <span>終了予定{{ dateFormat(plan.endDate) }}</span>
+      </div>
+      想定進捗{{ plan.planedProgress }} / 合計コマ数{{ plan.totalLectures }}
       <progress-bar :planned-progress="plan.planedProgress" :actual-progress="20"></progress-bar>
     </template>
     <pre>{{ JSON.stringify(standardPlan, null, 2) }}</pre>
