@@ -5,23 +5,41 @@
       "name": "Install Dependencies",
       "command": "bun install"
     }
-    ],
+  ],
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
+    "bun install": {
+      "name": "Install Dependencies",
+      "command": "bun install",
+      "restartOn": {
+        "files": [
+          "bun.lockb",
+          "**/package.json"
+        ],
+        "branch": true,
+        "resume": false
+      }
+    },
     "bun run build": {
       "name": "bun run build",
-      "command": "bun run build && echo Done",
-      "runAtStart": true
+      "command": "rm -rf dist ; bun run build && echo Done"
     },
     "serve built": {
       "name": "serve built dist",
-      "command": "cd dist; python3 -m http.server"
+      "command": "cd dist; python3 -m http.server",
+      "preview": {
+        "port": 8000,
+        "pr-link": "devtool"
+      }
     },
     "bun run dev": {
       "name": "bun run dev",
-      "command": "bun run format ; bun run dev",
-      "runAtStart": true
+      "command": "rm -rf dist ; bun run format ; bun run dev",
+      "preview": {
+        "port": 5178,
+        "prLink": "devtool"
+      }
     },
     "bun run lint": {
       "name": "lint",
@@ -29,7 +47,8 @@
     },
     "bun run format": {
       "name": "format",
-      "command": "bun run format"
+      "command": "bun run format",
+      "runAtStart": true
     },
     "bun run test:unit": {
       "name": "unit test",
