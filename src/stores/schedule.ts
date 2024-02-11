@@ -10,7 +10,7 @@ export type Schedule = {
   regularLectures: LectureCount
   startDate: Date
   endDate: Date
-  planedProgress?: LectureCount
+  planedProgress: LectureCount
 }
 
 type Millisec = number
