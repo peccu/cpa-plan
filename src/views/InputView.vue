@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
 import { useDeploymenturlStore } from '@/stores/deploymenturl'
-import { type Progress } from '@/stores/progress'
+import { type ProgressInput } from '@/stores/progress'
 
 const deploymenturl = useDeploymenturlStore()
 deploymenturl.loadUrl()
 
 let inLoading: Ref<boolean> = ref(true)
-let lastrow: Ref<Progress> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+let lastrow: Ref<ProgressInput> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 const fetch = async () => {
   inLoading.value = true
@@ -34,7 +34,7 @@ const fetch = async () => {
   return json
 }
 const post = async () => {
-  const data: Progress = [
+  const data: ProgressInput = [
     targetDate.value,
     financialAccountingLecture.value,
     financialAccountingPractice.value,

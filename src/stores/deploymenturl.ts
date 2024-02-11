@@ -1,7 +1,7 @@
 import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { type ScheduleInput } from '@/stores/schedule'
-import { type Progress } from '@/stores/progress'
+import { type ProgressInput } from '@/stores/progress'
 
 export const useDeploymenturlStore = defineStore('deploymenturl', () => {
   const url: Ref<string> = ref('')
@@ -28,7 +28,7 @@ export const useDeploymenturlStore = defineStore('deploymenturl', () => {
     const json: ScheduleInput[] = await response.json()
     return json
   }
-  const postNewLine = async (data: Progress) => {
+  const postNewLine = async (data: ProgressInput) => {
     const response = await fetch(url.value, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       // mode: "cors", // no-cors, *cors, same-origin

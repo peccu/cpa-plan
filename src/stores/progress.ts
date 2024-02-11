@@ -1,4 +1,4 @@
-export type Progress = [
+export type ProgressInput = [
   string,
   number,
   number,
