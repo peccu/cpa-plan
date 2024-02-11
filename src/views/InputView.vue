@@ -1,91 +1,27 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import { useDeploymenturlStore } from '@/stores/deploymenturl'
-import { type ProgressInput } from '@/stores/progress'
+import { useProgressStore } from '@/stores/progress'
+import { format } from '@/stores/dateutil'
 
-const deploymenturl = useDeploymenturlStore()
-deploymenturl.loadUrl()
-
-let inLoading: Ref<boolean> = ref(true)
-let lastrow: Ref<ProgressInput> = ref(['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+let inLoading: Ref<boolean> = ref(false)
+const progress = useProgressStore()
+progress.loadProgress()
 
 const fetch = async () => {
-  inLoading.value = true
-  const json = await deploymenturl.fetchLastRow()
-  console.log('fetch response: ', json)
-  lastrow.value = json
-  targetDate.value = json[1]
-  financialAccountingLecture.value = json[2]
-  financialAccountingPractice.value = json[3]
-  financialAccountingAdvanced.value = json[4]
-  managementAccountingLecture.value = json[5]
-  managementAccountingPractice.value = json[6]
-  managementAccountingAdvance.value = json[7]
-  auditLecture.value = json[8]
-  auditPractice.value = json[9]
-  companyLecture.value = json[10]
-  companyPractice.value = json[11]
-  taxLecture.value = json[12]
-  taxPractice.value = json[13]
-  taxLogic.value = json[14]
-  businessLecture.value = json[15]
-  businessPractice.value = json[16]
-  inLoading.value = false
-  return json
+    inLoading.value = true
+    await progress.fetchProgress()
+    inLoading.value = false
+    return progress.progress
 }
+
 const post = async () => {
-  const data: ProgressInput = [
-    targetDate.value,
-    financialAccountingLecture.value,
-    financialAccountingPractice.value,
-    financialAccountingAdvanced.value,
-    managementAccountingLecture.value,
-    managementAccountingPractice.value,
-    managementAccountingAdvance.value,
-    auditLecture.value,
-    auditPractice.value,
-    companyLecture.value,
-    companyPractice.value,
-    taxLecture.value,
-    taxPractice.value,
-    taxLogic.value,
-    businessLecture.value,
-    businessPractice.value
-  ]
-  console.log('sending', data)
-  const json = await deploymenturl.postNewLine(data)
-  console.log('post response: ', json)
-  return json
+    const json = await progress.postNewLine(progress.progress)
+    console.log('post response: ', json)
+    return json
 }
 
-if (deploymenturl.url != '') {
-  fetch()
-}
+fetch()
 
-const t = new Date()
-const targetDate: Ref<string> = ref(`${t.getFullYear()}/${t.getMonth() + 1}/${t.getDate()}`)
-
-// 財務会計論
-const financialAccountingLecture: Ref<number> = ref(0)
-const financialAccountingPractice: Ref<number> = ref(0)
-const financialAccountingAdvanced: Ref<number> = ref(0)
-// 管理会計論
-const managementAccountingLecture: Ref<number> = ref(0)
-const managementAccountingPractice: Ref<number> = ref(0)
-const managementAccountingAdvance: Ref<number> = ref(0)
-// 監査論
-const auditLecture: Ref<number> = ref(0)
-const auditPractice: Ref<number> = ref(0)
-// 企業法
-const companyLecture: Ref<number> = ref(0)
-const companyPractice: Ref<number> = ref(0)
-// 租税法
-const taxLecture: Ref<number> = ref(0)
-const taxPractice: Ref<number> = ref(0)
-const taxLogic: Ref<number> = ref(0)
-// 経営学
-const businessLecture: Ref<number> = ref(0)
-const businessPractice: Ref<number> = ref(0)
 </script>
 
 <template>
@@ -99,7 +35,10 @@ const businessPractice: Ref<number> = ref(0)
     <div class="mt-3">
       <div class="mt-3">
         <span class="mr-3 text-xl">対象日</span>
-        <input v-model="targetDate" :disabled="inLoading" type="date" class="p-1 text-black w-30" />
+        <input
+          :value="format(progress.progress.targetDate)"
+          :disabled="inLoading"
+          type="date" class="p-1 text-black w-30" @input="progress.progress.targetDate = $event.target.value" />
       </div>
     </div>
     <div class="mt-3">
@@ -113,7 +52,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="financialAccountingLecture"
+          v-model="progress.progress.financialAccountingLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -121,7 +60,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="financialAccountingPractice"
+          v-model="progress.progress.financialAccountingPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -129,7 +68,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="financialAccountingAdvanced"
+          v-model="progress.progress.financialAccountingAdvanced"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -149,7 +88,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="managementAccountingLecture"
+          v-model="progress.progress.managementAccountingLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -157,7 +96,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="managementAccountingPractice"
+          v-model="progress.progress.managementAccountingPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -165,7 +104,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="managementAccountingAdvance"
+          v-model="progress.progress.managementAccountingAdvance"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -184,7 +123,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="auditLecture"
+          v-model="progress.progress.auditLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -192,7 +131,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="auditPractice"
+          v-model="progress.progress.auditPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -211,7 +150,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="companyLecture"
+          v-model="progress.progress.companyLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -219,7 +158,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="companyPractice"
+          v-model="progress.progress.companyPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -239,7 +178,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="taxLecture"
+          v-model="progress.progress.taxLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -247,7 +186,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="taxPractice"
+          v-model="progress.progress.taxPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -255,7 +194,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="taxLogic"
+          v-model="progress.progress.taxLogic"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -274,7 +213,7 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          v-model="businessLecture"
+          v-model="progress.progress.businessLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
@@ -282,7 +221,7 @@ const businessPractice: Ref<number> = ref(0)
           class="p-1 mr-3 w-20 text-black"
         />
         <input
-          v-model="businessPractice"
+          v-model="progress.progress.businessPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
