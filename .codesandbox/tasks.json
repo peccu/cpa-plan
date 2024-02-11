@@ -9,7 +9,7 @@
       "command": "bun install",
       "restartOn": {
         "files": ["bun.lockb", "**/package.json"], // File globs that trigger this task to restart
-        "branch": true, // restart this task when creating a new branch/fork
+        "branch": true // restart this task when creating a new branch/fork
       }
     },
     "bun run build": {
