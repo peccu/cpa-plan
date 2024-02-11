@@ -1,25 +1,7 @@
 import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { type ScheduleInput } from '@/stores/schedule'
-
-export type Progress = [
-  string,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number
-]
+import { type Progress } from '@/stores/progress'
 
 export const useDeploymenturlStore = defineStore('deploymenturl', () => {
   const url: Ref<string> = ref('')
