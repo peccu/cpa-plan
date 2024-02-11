@@ -27,9 +27,9 @@
     },
     "serve built": {
       "name": "serve built dist",
-      "command": "cd dist; python3 -m http.server",
+      "command": "bun run build:preview",
       "preview": {
-        "port": 8000,
+        "port": 4173,
         "pr-link": "devtool"
       }
     },
