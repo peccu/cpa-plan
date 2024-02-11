@@ -44,9 +44,9 @@ if (deploymenturl.url != '') {
   <main class="wbs">
     <h1 class="text-3xl font-bold">This is an WBS page</h1>
     <button
-      @click="fetchSchedule"
       :disabled="inLoading"
       class="py-1 px-3 m-2 rounded ring-2 ring-white"
+      @click="fetchSchedule"
     >
       Fetch Schedule
     </button>
@@ -55,7 +55,7 @@ if (deploymenturl.url != '') {
     <template v-for="plan in standardPlan">
       <h3>{{ plan.lesson }}</h3>
       {{ plan.planedProgress }}
-      <progress-bar :plannedProgress="plan.planedProgress" :actualProgress="20"></progress-bar>
+      <progress-bar :planned-progress="plan.planedProgress" :actual-progress="20"></progress-bar>
     </template>
     <pre>{{ JSON.stringify(standardPlan, null, 2) }}</pre>
     <h2 class="text-2xl">Speed Plan</h2>

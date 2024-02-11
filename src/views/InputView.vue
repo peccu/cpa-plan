@@ -90,7 +90,7 @@ const businessPractice: Ref<number> = ref(0)
 <template>
   <main>
     <div>
-      <button @click="fetch" :disabled="inLoading" class="py-1 px-3 m-2 rounded ring-2 ring-white">
+      <button :disabled="inLoading" class="py-1 px-3 m-2 rounded ring-2 ring-white" @click="fetch">
         Fetch current
       </button>
       <span v-if="inLoading">Loading...</span>
@@ -98,7 +98,7 @@ const businessPractice: Ref<number> = ref(0)
     <div class="mt-3">
       <div class="mt-3">
         <span class="mr-3 text-xl">対象日</span>
-        <input :disabled="inLoading" type="date" class="p-1 text-black w-30" v-model="targetDate" />
+        <input v-model="targetDate" :disabled="inLoading" type="date" class="p-1 text-black w-30" />
       </div>
     </div>
     <div class="mt-3">
@@ -112,28 +112,28 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          :disabled="inLoading"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          type="text"
-          class="p-1 mr-3 w-20 text-black"
           v-model="financialAccountingLecture"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="financialAccountingPractice"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="financialAccountingAdvanced"
+          :disabled="inLoading"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          type="text"
+          class="p-1 mr-3 w-20 text-black"
         />
       </div>
     </div>
@@ -148,28 +148,28 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          :disabled="inLoading"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          type="text"
-          class="p-1 mr-3 w-20 text-black"
           v-model="managementAccountingLecture"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="managementAccountingPractice"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="managementAccountingAdvance"
+          :disabled="inLoading"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          type="text"
+          class="p-1 mr-3 w-20 text-black"
         />
       </div>
     </div>
@@ -183,20 +183,20 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
+          v-model="auditLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="auditLecture"
         />
         <input
+          v-model="auditPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="auditPractice"
         />
       </div>
     </div>
@@ -210,20 +210,20 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
+          v-model="companyLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="companyLecture"
         />
         <input
+          v-model="companyPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="companyPractice"
         />
       </div>
     </div>
@@ -238,28 +238,28 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
-          :disabled="inLoading"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          type="text"
-          class="p-1 mr-3 w-20 text-black"
           v-model="taxLecture"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="taxPractice"
-        />
-        <input
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
+        />
+        <input
           v-model="taxLogic"
+          :disabled="inLoading"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          type="text"
+          class="p-1 mr-3 w-20 text-black"
         />
       </div>
     </div>
@@ -273,26 +273,26 @@ const businessPractice: Ref<number> = ref(0)
       </div>
       <div class="mt-3">
         <input
+          v-model="businessLecture"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="businessLecture"
         />
         <input
+          v-model="businessPractice"
           :disabled="inLoading"
           inputmode="numeric"
           pattern="[0-9]*"
           type="text"
           class="p-1 mr-3 w-20 text-black"
-          v-model="businessPractice"
         />
       </div>
     </div>
 
     <div class="mt-14 w-full">
-      <button @click="post" class="inline-block py-1 px-3 m-2 w-full rounded ring-2 ring-white">
+      <button class="inline-block py-1 px-3 m-2 w-full rounded ring-2 ring-white" @click="post">
         Submit
       </button>
     </div>

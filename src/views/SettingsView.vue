@@ -14,10 +14,10 @@ const saveUrl = () => {
 <template>
   <div class="settings">
     <div class="overflow-scroll">loaded URL: {{ deploymenturl.url }}</div>
-    <input name="deploymentURL" type="url" v-model="url" class="text-black" />
+    <input v-model="url" name="deploymentURL" type="url" class="text-black" />
     <div>inputted URL: {{ url }}</div>
     <div class="mt-14 w-full">
-      <button @click="saveUrl" class="inline-block py-1 px-3 m-2 w-full rounded ring-2 ring-white">
+      <button class="inline-block py-1 px-3 m-2 w-full rounded ring-2 ring-white" @click="saveUrl">
         Save
       </button>
     </div>
