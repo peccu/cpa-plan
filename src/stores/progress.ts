@@ -66,8 +66,8 @@ const nullProgress: Progress = {
   businessPractice: 0
 }
 
-const serialize = (p: Progress) => JSON.stringify(
-  {
+const serialize = (p: Progress) =>
+  JSON.stringify({
     targetDate: format(p.targetDate),
     financialAccountingLecture: p.financialAccountingLecture,
     financialAccountingPractice: p.financialAccountingPractice,
@@ -83,35 +83,33 @@ const serialize = (p: Progress) => JSON.stringify(
     taxPractice: p.taxPractice,
     taxLogic: p.taxLogic,
     businessLecture: p.businessLecture,
-    businessPractice: p.businessPractice,
-  }
-)
+    businessPractice: p.businessPractice
+  })
 
 const deserialize = (text: string) => {
-  const json = JSON.parse(text)
-  console.log(json)
+  const p = JSON.parse(text)
+  console.log(p)
   return {
-    targetDate: new Date(json.targetDate),
-    financialAccountingLecture: json.financialAccountingLecture,
-    financialAccountingPractice: json.financialAccountingPractice,
-    financialAccountingAdvanced: json.financialAccountingAdvanced,
-    managementAccountingLecture: json.managementAccountingLecture,
-    managementAccountingPractice: json.managementAccountingPractice,
-    managementAccountingAdvance: json.managementAccountingAdvance,
-    auditLecture: json.auditLecture,
-    auditPractice: json.auditPractice,
-    companyLecture: json.companyLecture,
-    companyPractice: json.companyPractice,
-    taxLecture: json.taxLecture,
-    taxPractice: json.taxPractice,
-    taxLogic: json.taxLogic,
-    businessLecture: json.businessLecture,
-    businessPractice: json.businessPractice
+    targetDate: new Date(p.targetDate),
+    financialAccountingLecture: p.financialAccountingLecture,
+    financialAccountingPractice: p.financialAccountingPractice,
+    financialAccountingAdvanced: p.financialAccountingAdvanced,
+    managementAccountingLecture: p.managementAccountingLecture,
+    managementAccountingPractice: p.managementAccountingPractice,
+    managementAccountingAdvance: p.managementAccountingAdvance,
+    auditLecture: p.auditLecture,
+    auditPractice: p.auditPractice,
+    companyLecture: p.companyLecture,
+    companyPractice: p.companyPractice,
+    taxLecture: p.taxLecture,
+    taxPractice: p.taxPractice,
+    taxLogic: p.taxLogic,
+    businessLecture: p.businessLecture,
+    businessPractice: p.businessPractice
   } as Progress
 }
 
 export const useProgressStore = defineStore('progress', () => {
-  const loaded = ref(false)
   const progress: Ref<Progress> = ref(nullProgress)
   const deploymenturl = useDeploymenturlStore()
   deploymenturl.loadUrl()
@@ -166,7 +164,6 @@ export const useProgressStore = defineStore('progress', () => {
   const setProgress = (newprogress: Progress) => {
     progress.value = newprogress
     localStorage.setItem('progress', serialize(newprogress))
-    return newprogress
   }
   const loadProgress = () => {
     const data = localStorage.getItem('progress')
@@ -176,7 +173,6 @@ export const useProgressStore = defineStore('progress', () => {
     }
     progress.value = deserialize(data)
     console.log('deserialized', progress.value)
-    loaded.value = true
     return progress.value
   }
   const fetchProgress = async () => {
@@ -207,6 +203,5 @@ export const useProgressStore = defineStore('progress', () => {
     return progress.value
   }
 
-  return { loaded, loadProgress, progress, fetchProgress, postNewLine }
-}
-)
+  return { loadProgress, progress, fetchProgress, postNewLine }
+})

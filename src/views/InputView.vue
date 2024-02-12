@@ -3,25 +3,27 @@ import { ref, type Ref } from 'vue'
 import { useProgressStore } from '@/stores/progress'
 import { format } from '@/stores/dateutil'
 
-let inLoading: Ref<boolean> = ref(false)
+const inLoading: Ref<boolean> = ref(false)
+const targetDate: Ref<string> = ref('')
 const progress = useProgressStore()
 progress.loadProgress()
 
 const fetch = async () => {
-    inLoading.value = true
-    await progress.fetchProgress()
-    inLoading.value = false
-    return progress.progress
+  inLoading.value = true
+  await progress.fetchProgress()
+  targetDate.value = format(progress.progress.targetDate)
+  inLoading.value = false
+  return progress.progress
 }
 
 const post = async () => {
-    const json = await progress.postNewLine(progress.progress)
-    console.log('post response: ', json)
-    return json
+  progress.progress.targetDate = new Date(targetDate.value)
+  const json = await progress.postNewLine(progress.progress)
+  console.log('post response: ', json)
+  return json
 }
 
 fetch()
-
 </script>
 
 <template>
@@ -35,10 +37,7 @@ fetch()
     <div class="mt-3">
       <div class="mt-3">
         <span class="mr-3 text-xl">対象日</span>
-        <input
-          :value="format(progress.progress.targetDate)"
-          :disabled="inLoading"
-          type="date" class="p-1 text-black w-30" @input="progress.progress.targetDate = $event.target.value" />
+        <input v-model="targetDate" :disabled="inLoading" type="date" class="p-1 text-black w-30" />
       </div>
     </div>
     <div class="mt-3">
