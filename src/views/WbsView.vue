@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
 import { useScheduleStore } from '@/stores/schedule'
+import { useProgressStore } from '@/stores/progress'
 import ProgressBar from '@/components/ProgressBar.vue'
 import { format } from '@/stores/dateutil'
 
 let inLoading: Ref<boolean> = ref(true)
 const schedule = useScheduleStore()
 schedule.loadSchedule()
+const targetDate: Ref<string> = ref('')
+const progress = useProgressStore()
+progress.loadProgress()
 
 const fetch = async () => {
   inLoading.value = true
   await schedule.fetchSchedule()
-  // speedPlan.value = plan.speedPlan
-  // standardPlan.value = plan.standardPlan
+  await progress.fetchProgress()
+  targetDate.value = format(progress.progress.targetDate)
   inLoading.value = false
   return schedule.schedule
 }
